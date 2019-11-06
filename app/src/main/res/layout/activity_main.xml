@@ -18,21 +18,31 @@
         android:layout_centerHorizontal="true">
 
         <Button
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/personal_question"
             android:id="@+id/button_survey_example_1"/>
 
         <Button
+            android:layout_marginTop="7dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/information_question"
-            android:id="@+id/button_survey_example_2" />
+            android:id="@+id/button_survey_example_2"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"/>
 
         <Button
+            android:layout_marginTop="7dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/your_survay"
-            android:id="@+id/button_survey_example_3" />
+            android:id="@+id/button_survey_example_3"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 </RelativeLayout>

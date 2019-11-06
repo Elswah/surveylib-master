@@ -1,14 +1,23 @@
 package com.androidadvance.androidsurvey.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
@@ -21,11 +30,18 @@ public class FragmentStart extends Fragment {
     private FragmentActivity mContext;
     private TextView textView_start;
 
+    TextInputLayout txtUserName;
+    TextInputEditText etxtUserName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_start, container, false);
+
+         txtUserName=  rootView.findViewById(R.id.txt_user_name);
+         etxtUserName =  rootView.findViewById(R.id.etxt_user_name);
+
 
         textView_start = (TextView) rootView.findViewById(R.id.textView_start);
         Fonts.set(textView_start, getContext());
@@ -34,9 +50,56 @@ public class FragmentStart extends Fragment {
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                hideTheKeyPad();
+
+                if (TextUtils.isEmpty(etxtUserName.getText()))
+                {
+
+                    txtUserName.setErrorEnabled(true);
+                    txtUserName.setError("Please enter your name!");
+                    return;
+                }
+                if (etxtUserName.getText().toString().length()<3)
+                {
+                    txtUserName.setErrorEnabled(true);
+                    txtUserName.setError("Please enter valid name!");
+                    return;
+                }
+
                 ((SurveyActivity) mContext).go_to_next();
+                Toast.makeText(mContext, "Name : "+ etxtUserName.getText().toString() , Toast.LENGTH_SHORT).show();
+
+
             }
         });
+
+        etxtUserName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                txtUserName.setErrorEnabled(false);
+                txtUserName.setError("");
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+            }
+        });
+
+
+
+
 
         return rootView;
     }
@@ -54,5 +117,16 @@ public class FragmentStart extends Fragment {
 
 
 
+    }
+
+
+    void hideTheKeyPad(){
+
+        // Check if no view has focus:
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.androidadvance.androidsurvey.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -102,10 +103,11 @@ public class FragmentCheckboxes extends Fragment {
         }
 
         for (String choice : qq_data) {
-            CheckBox cb = new CheckBox(mContext);
+            CheckBox cb = new CheckBox(new ContextThemeWrapper(mContext, R.style.MyCheckbox));
             cb.setText(Html.fromHtml(choice));
             cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             cb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
             linearLayout_checkboxes.addView(cb);
             allCb.add(cb);
 

@@ -108,6 +108,7 @@ public class FragmentRadioboxes extends Fragment {
             rb.setText(Html.fromHtml(choice));
             rb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             rb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            rb.setBackground(getActivity().getResources().getDrawable(R.drawable.custom_radio_button));
             radioGroup.addView(rb);
             allRb.add(rb);
 
