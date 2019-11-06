@@ -2,10 +2,12 @@ package com.androidadvance.androidsurvey.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
+import com.androidadvance.androidsurvey.AnswersReference;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -66,9 +68,9 @@ public class FragmentStart extends Fragment {
                     return;
                 }
 
+
+                AnswersReference.getInstance().put_name(etxtUserName.getText().toString().trim(), "6522");
                 ((SurveyActivity) mContext).go_to_next();
-                Toast.makeText(mContext, "Name : " + etxtUserName.getText().toString(), Toast.LENGTH_SHORT).show();
-                etxtUserName.setText("");
 
 
             }
@@ -121,7 +123,6 @@ public class FragmentStart extends Fragment {
 
 
     void hideTheKeyPad(){
-
         // Check if no view has focus:
         View view = getActivity().getCurrentFocus();
         if (view != null) {

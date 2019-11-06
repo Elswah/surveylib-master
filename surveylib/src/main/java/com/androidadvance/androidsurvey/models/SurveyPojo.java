@@ -1,6 +1,14 @@
 package com.androidadvance.androidsurvey.models;
 
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.androidadvance.androidsurvey.roomDatabase.Converters;
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,51 +16,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(tableName = "SurveyPojo")
 public class SurveyPojo implements Serializable {
-    private int id;
-    private User user;
+
+    @PrimaryKey
+    @NonNull
+    public int id;
+
+
+    @Ignore
+    private String userName;
+
 
     @SerializedName("survey_properties")
     @Expose
-    private SurveyProperties surveyProperties;
+//    @TypeConverters(Converters.class)
+    @Ignore
+    public SurveyProperties surveyProperties;
+
+
     @SerializedName("questions")
     @Expose
-    private List<Question> questions = new ArrayList<Question>();
+    @Ignore
+    public List<Question> questions = new ArrayList<Question>();
 
-    /**
-     *
-     * @return
-     * The surveyProperties
-     */
-    public SurveyProperties getSurveyProperties() {
-        return surveyProperties;
-    }
-
-    /**
-     *
-     * @param surveyProperties
-     * The survey_properties
-     */
-    public void setSurveyProperties(SurveyProperties surveyProperties) {
-        this.surveyProperties = surveyProperties;
-    }
-
-    /**
-     *
-     * @return
-     * The questions
-     */
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    /**
-     *
-     * @param questions
-     * The questions
-     */
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
 
 }

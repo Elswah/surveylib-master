@@ -22,10 +22,10 @@
         android:textIsSelectable="false"
         android:textSize="16sp" />
 
-        <com.github.gcacace.signaturepad.views.SignaturePad
-            android:id="@+id/signaturePad"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
+<!--        <com.github.gcacace.signaturepad.views.SignaturePad-->
+<!--            android:id="@+id/signaturePad"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="200dp" />-->
 
 
     </LinearLayout>

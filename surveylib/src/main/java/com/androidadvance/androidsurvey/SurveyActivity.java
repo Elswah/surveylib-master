@@ -3,9 +3,13 @@ package com.androidadvance.androidsurvey;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.androidadvance.androidsurvey.adapters.AdapterFragmentQ;
@@ -18,11 +22,16 @@ import com.androidadvance.androidsurvey.fragment.FragmentStart;
 import com.androidadvance.androidsurvey.fragment.FragmentTextSimple;
 import com.androidadvance.androidsurvey.models.Question;
 import com.androidadvance.androidsurvey.models.SurveyPojo;
+import com.androidadvance.androidsurvey.viewModel.SurveyPojoViewModel;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SurveyActivity extends AppCompatActivity {
+
+    private SurveyPojoViewModel mSurveyPojoViewModel;
+
 
     private SurveyPojo mSurveyPojo;
     private ViewPager mPager;
@@ -35,6 +44,18 @@ public class SurveyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_survey);
 
 
+        //view Model sec
+        mSurveyPojoViewModel = new ViewModelProvider(this).get(SurveyPojoViewModel.class);
+        mSurveyPojoViewModel.getAllSurveys().observe(this, new Observer<List<SurveyPojo>>() {
+            @Override
+            public void onChanged(@Nullable final List<SurveyPojo> surveyPojoList) {
+                // Update the cached copy of the words in the adapter.
+                Log.e("surveyListSize",surveyPojoList.size()+"");
+            }
+        });
+
+
+
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
@@ -44,22 +65,22 @@ public class SurveyActivity extends AppCompatActivity {
         }
 
 
-        Log.i("json Object = ", String.valueOf(mSurveyPojo.getQuestions()));
+        Log.i("json Object = ", String.valueOf(mSurveyPojo.questions));
 
         final ArrayList<Fragment> arraylist_fragments = new ArrayList<>();
 
         //- START -
-        if (!mSurveyPojo.getSurveyProperties().getSkipIntro()) {
+        if (!mSurveyPojo.surveyProperties.getSkipIntro()) {
             FragmentStart frag_start = new FragmentStart();
             Bundle sBundle = new Bundle();
-            sBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
+            sBundle.putSerializable("survery_properties", mSurveyPojo.surveyProperties);
             sBundle.putString("style", style_string);
             frag_start.setArguments(sBundle);
             arraylist_fragments.add(frag_start);
         }
 
         //- FILL -
-        for (Question mQuestion : mSurveyPojo.getQuestions()) {
+        for (Question mQuestion : mSurveyPojo.questions) {
 
             if (mQuestion.getQuestionType().equals("String")) {
                 FragmentTextSimple frag = new FragmentTextSimple();
@@ -111,7 +132,7 @@ public class SurveyActivity extends AppCompatActivity {
         //- END -
         FragmentEnd frag_end = new FragmentEnd();
         Bundle eBundle = new Bundle();
-        eBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
+        eBundle.putSerializable("survery_properties", mSurveyPojo.surveyProperties);
         eBundle.putString("style", style_string);
         frag_end.setArguments(eBundle);
         arraylist_fragments.add(frag_end);
@@ -144,4 +165,7 @@ public class SurveyActivity extends AppCompatActivity {
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
+
+
+
 }

@@ -8,7 +8,11 @@ import java.util.LinkedHashMap;
 
 public class AnswersReference {
     private volatile static AnswersReference uniqueInstance;
+
+
     private final LinkedHashMap<String, String> answered_hashmap = new LinkedHashMap<>();
+    private  String userName;
+    private  String sessionId;
 
 
     private AnswersReference() {
@@ -16,6 +20,11 @@ public class AnswersReference {
 
     public void put_answer(String key, String value) {
         answered_hashmap.put(key, value);
+    }
+
+    public void put_name(String userName, String sessionId) {
+        this.userName=userName;
+        this.sessionId = sessionId;
     }
 
     public String get_json_object() {
@@ -38,4 +47,6 @@ public class AnswersReference {
         }
         return uniqueInstance;
     }
+
+
 }
