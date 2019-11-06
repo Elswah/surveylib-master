@@ -15,7 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.AnswersReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
@@ -40,9 +40,16 @@ public class FragmentCheckboxes extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_checkboxes, container, false);
 
+        init(rootView);
+        return rootView;
+    }
+
+    private void init(ViewGroup rootView) {
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
+        // set btn font
         Fonts.set(button_continue, getContext());
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
+        // set textView font
         Fonts.set(textview_q_title, getContext());
         linearLayout_checkboxes = (LinearLayout) rootView.findViewById(R.id.linearLayout_checkboxes);
         button_continue.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +58,6 @@ public class FragmentCheckboxes extends Fragment {
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
-
-        return rootView;
     }
 
     private void collect_data() {
@@ -69,7 +74,7 @@ public class FragmentCheckboxes extends Fragment {
 
         if (the_choices.length() > 2) {
             the_choices = the_choices.substring(0, the_choices.length() - 2);
-            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choices);
+            AnswersReference.getInstance().put_answer(textview_q_title.getText().toString(), the_choices);
         }
 
 
@@ -98,20 +103,24 @@ public class FragmentCheckboxes extends Fragment {
         }
 
         List<String> qq_data = q_data.getChoices();
+        // if getRandomChoices variable with true make list shuffle
         if (q_data.getRandomChoices()) {
             Collections.shuffle(qq_data);
         }
 
         for (String choice : qq_data) {
+            // creating checkbox programmatically with style
+            // creating checkbox based on number of choices then add it to array of checkboxes
             CheckBox cb = new CheckBox(new ContextThemeWrapper(mContext, R.style.MyCheckbox));
             cb.setText(Html.fromHtml(choice));
-            cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             cb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             linearLayout_checkboxes.addView(cb);
             allCb.add(cb);
 
-
+            // onclick of checkbox after every click call collect_data to cehck
+            // what is user checked
             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.AnswersReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
@@ -26,8 +26,12 @@ public class FragmentEnd extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_end, container, false);
+        //initView
+        init(rootView);
+        return rootView;
+    }
 
-
+    private void init(ViewGroup rootView) {
         Button button_finish = (Button) rootView.findViewById(R.id.button_finish);
         textView_end = (TextView) rootView.findViewById(R.id.textView_end);
         Fonts.set(button_finish, getContext());
@@ -38,12 +42,10 @@ public class FragmentEnd extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((SurveyActivity) mContext).event_survey_completed(Answers.getInstance());
+                ((SurveyActivity) mContext).event_survey_completed(AnswersReference.getInstance());
 
             }
         });
-
-        return rootView;
     }
 
     @Override

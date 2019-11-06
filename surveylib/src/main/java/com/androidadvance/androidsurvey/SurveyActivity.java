@@ -138,7 +138,7 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
-    public void event_survey_completed(Answers instance) {
+    public void event_survey_completed(AnswersReference instance) {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("answers", instance.get_json_object());
         setResult(Activity.RESULT_OK, returnIntent);

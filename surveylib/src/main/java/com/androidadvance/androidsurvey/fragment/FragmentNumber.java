@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.AnswersReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
@@ -32,9 +32,14 @@ public class FragmentNumber extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_text_simple, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate
+                (R.layout.fragment_text_simple, container, false);
+        // initView
+        init(rootView);
+        return rootView;
+    }
 
+    private void init(ViewGroup rootView) {
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         editText_answer = (EditText) rootView.findViewById(R.id.editText_answer);
@@ -46,12 +51,10 @@ public class FragmentNumber extends Fragment {
         editText_answer.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Answers.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
+                AnswersReference.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
-
-        return rootView;
     }
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {

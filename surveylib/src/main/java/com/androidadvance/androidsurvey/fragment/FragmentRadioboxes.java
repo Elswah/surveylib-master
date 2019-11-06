@@ -15,7 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.Answers;
+import com.androidadvance.androidsurvey.AnswersReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
@@ -32,16 +32,21 @@ public class FragmentRadioboxes extends Fragment {
     private Button button_continue;
     private TextView textview_q_title;
     private RadioGroup radioGroup;
-    private final ArrayList<RadioButton> allRb = new ArrayList<>();
+    private final ArrayList<RadioButton> radioBtnList = new ArrayList<>();
     private boolean at_leaset_one_checked = false;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_radioboxes, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate
+                (R.layout.fragment_radioboxes, container, false);
+        // initView
+        init(rootView);
+        return rootView;
+    }
 
+    private void init(ViewGroup rootView) {
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
 
@@ -55,8 +60,6 @@ public class FragmentRadioboxes extends Fragment {
                 ((SurveyActivity) mContext).go_to_next();
             }
         });
-
-        return rootView;
     }
 
     private void collect_data() {
@@ -64,7 +67,7 @@ public class FragmentRadioboxes extends Fragment {
         //----- collection & validation for is_required
         String the_choice = "";
         at_leaset_one_checked = false;
-        for (RadioButton rb : allRb) {
+        for (RadioButton rb : radioBtnList) {
             if (rb.isChecked()) {
                 at_leaset_one_checked = true;
                 the_choice = rb.getText().toString();
@@ -72,7 +75,7 @@ public class FragmentRadioboxes extends Fragment {
         }
 
         if (the_choice.length() > 0) {
-            Answers.getInstance().put_answer(textview_q_title.getText().toString(), the_choice);
+            AnswersReference.getInstance().put_answer(textview_q_title.getText().toString(), the_choice);
         }
 
 
@@ -102,15 +105,15 @@ public class FragmentRadioboxes extends Fragment {
         if (q_data.getRandomChoices()) {
             Collections.shuffle(qq_data);
         }
-
+        // create radioButton programmatically based on number of choices
         for (String choice : qq_data) {
             RadioButton rb = new RadioButton(mContext);
             rb.setText(Html.fromHtml(choice));
-            rb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            rb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             rb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             rb.setBackground(getActivity().getResources().getDrawable(R.drawable.custom_radio_button));
             radioGroup.addView(rb);
-            allRb.add(rb);
+            radioBtnList.add(rb);
 
             rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

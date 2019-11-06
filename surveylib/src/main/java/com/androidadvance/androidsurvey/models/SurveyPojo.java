@@ -1,13 +1,16 @@
 package com.androidadvance.androidsurvey.models;
 
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 public class SurveyPojo implements Serializable {
+    private int id;
+    private User user;
 
     @SerializedName("survey_properties")
     @Expose

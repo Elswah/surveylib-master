@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,10 +56,10 @@ public class FragmentStart extends Fragment {
                 {
 
                     txtUserName.setErrorEnabled(true);
-                    txtUserName.setError("Please enter your name!");
+                    txtUserName.setError("Please enter your name");
                     return;
                 }
-                if (etxtUserName.getText().toString().length()<3)
+                if (etxtUserName.getText().toString().trim().length() < 3)
                 {
                     txtUserName.setErrorEnabled(true);
                     txtUserName.setError("Please enter valid name!");
@@ -68,7 +67,8 @@ public class FragmentStart extends Fragment {
                 }
 
                 ((SurveyActivity) mContext).go_to_next();
-                Toast.makeText(mContext, "Name : "+ etxtUserName.getText().toString() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Name : " + etxtUserName.getText().toString(), Toast.LENGTH_SHORT).show();
+                etxtUserName.setText("");
 
 
             }
@@ -110,7 +110,7 @@ public class FragmentStart extends Fragment {
 
         mContext = getActivity();
         SurveyProperties survery_properties = (SurveyProperties) getArguments().getSerializable("survery_properties");
-
+        // intro must be html
         assert survery_properties != null;
         textView_start.setText(Html.fromHtml(survery_properties.getIntroMessage()));
 
