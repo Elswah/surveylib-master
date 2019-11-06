@@ -8,9 +8,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.androidadvance.androidsurvey.models.SurveyPojo;
+import com.androidadvance.androidsurvey.models.SurveyTobeSaved;
 
-@Database(entities = {SurveyPojo.class}, version = 1)
-@TypeConverters({Converters.class})
+@Database(entities = {SurveyTobeSaved.class}, version = 2)
+@TypeConverters(DataConverters.class)
 public abstract class SurveysRoomDataBase extends RoomDatabase {
 
     public abstract SurvyDao survyDao();
@@ -24,6 +25,7 @@ public abstract class SurveysRoomDataBase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             SurveysRoomDataBase.class, "surveys_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

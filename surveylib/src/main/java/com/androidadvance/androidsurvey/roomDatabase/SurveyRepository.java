@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import com.androidadvance.androidsurvey.models.SurveyPojo;
+import com.androidadvance.androidsurvey.models.SurveyTobeSaved;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class SurveyRepository {
 
 
     private SurvyDao mSurvyDao;
-    private LiveData<List<SurveyPojo>> mAllSurveys;
+    private LiveData<List<SurveyTobeSaved>> mAllSurveys;
 
 
     public SurveyRepository(Application application) {
@@ -22,16 +23,16 @@ public class SurveyRepository {
         mAllSurveys = mSurvyDao.getAllSurveys();
     }
 
-    public LiveData<List<SurveyPojo>> getmAllSurveys() {
+    public LiveData<List<SurveyTobeSaved>> getmAllSurveys() {
         return mAllSurveys;
     }
 
 
-    public void insert (SurveyPojo surveyPojo) {
+    public void insert (SurveyTobeSaved surveyPojo) {
         new insertAsyncTask(mSurvyDao).execute(surveyPojo);
     }
 
-    private static class insertAsyncTask extends AsyncTask<SurveyPojo, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<SurveyTobeSaved, Void, Void> {
 
         private SurvyDao mAsyncTaskDao;
 
@@ -40,7 +41,7 @@ public class SurveyRepository {
         }
 
         @Override
-        protected Void doInBackground(final SurveyPojo... params) {
+        protected Void doInBackground(final SurveyTobeSaved ... params) {
             mAsyncTaskDao.insert(params[0]);
             return null;
         }

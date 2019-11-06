@@ -17,7 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.AnswersReference;
+import com.androidadvance.androidsurvey.SessionReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
@@ -77,7 +77,7 @@ public class FragmentRadioboxes extends Fragment {
         }
 
         if (the_choice.length() > 0) {
-            AnswersReference.getInstance().put_answer(textview_q_title.getText().toString(), the_choice);
+            SessionReference.getInstance().put_answer(textview_q_title.getText().toString(), the_choice);
         }
 
 

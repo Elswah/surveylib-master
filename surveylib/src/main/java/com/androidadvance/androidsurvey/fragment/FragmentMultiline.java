@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.AnswersReference;
+import com.androidadvance.androidsurvey.SessionReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
@@ -50,7 +50,7 @@ public class FragmentMultiline extends Fragment {
 
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                AnswersReference.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
+                SessionReference.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
                 ((SurveyActivity) mContext).go_to_next();
             }
         });

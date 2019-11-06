@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.androidadvance.androidsurvey.models.SurveyPojo;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
+import com.androidadvance.androidsurvey.models.SurveyTobeSaved;
 import com.androidadvance.androidsurvey.roomDatabase.SurveyRepository;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class SurveyPojoViewModel extends AndroidViewModel {
 
     private SurveyRepository mRepository;
-    private LiveData<List<SurveyPojo>> mAllWords;
+    private LiveData<List<SurveyTobeSaved>> mAllWords;
 
 
     public SurveyPojoViewModel(@NonNull Application application) {
@@ -25,12 +26,12 @@ public class SurveyPojoViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<SurveyPojo>> getAllSurveys() {
+    public LiveData<List<SurveyTobeSaved>> getAllSurveys() {
         return mAllWords;
     }
 
-    public void insert(SurveyPojo surveyPojo) {
-        mRepository.insert(surveyPojo);
+    public void insert(SurveyTobeSaved survey) {
+        mRepository.insert(survey);
     }
 }
 

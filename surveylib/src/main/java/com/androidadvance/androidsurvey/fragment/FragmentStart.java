@@ -3,7 +3,7 @@ package com.androidadvance.androidsurvey.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.androidadvance.androidsurvey.AnswersReference;
+import com.androidadvance.androidsurvey.SessionReference;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
@@ -69,7 +68,7 @@ public class FragmentStart extends Fragment {
                 }
 
 
-                AnswersReference.getInstance().put_name(etxtUserName.getText().toString().trim(), "6522");
+                SessionReference.getInstance().setName(etxtUserName.getText().toString().trim());
                 ((SurveyActivity) mContext).go_to_next();
 
 

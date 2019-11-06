@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.androidadvance.androidsurvey.models.SurveyPojo;
+import com.androidadvance.androidsurvey.models.SurveyTobeSaved;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ public interface SurvyDao {
 
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
-        void insert(SurveyPojo survey);
+        void insert(SurveyTobeSaved survey);
 
-        @Query("DELETE FROM SurveyPojo")
+        @Query("DELETE FROM savedSurveys")
         void deleteAll();
 
-        @Query("SELECT * from SurveyPojo")
-        LiveData<List<SurveyPojo>> getAllSurveys();
+        @Query("SELECT * from savedSurveys Order by date DESC")
+        LiveData<List<SurveyTobeSaved>> getAllSurveys();
     }

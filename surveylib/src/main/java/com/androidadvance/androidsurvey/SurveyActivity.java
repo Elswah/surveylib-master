@@ -22,6 +22,7 @@ import com.androidadvance.androidsurvey.fragment.FragmentStart;
 import com.androidadvance.androidsurvey.fragment.FragmentTextSimple;
 import com.androidadvance.androidsurvey.models.Question;
 import com.androidadvance.androidsurvey.models.SurveyPojo;
+import com.androidadvance.androidsurvey.models.SurveyTobeSaved;
 import com.androidadvance.androidsurvey.viewModel.SurveyPojoViewModel;
 import com.google.gson.Gson;
 
@@ -46,11 +47,11 @@ public class SurveyActivity extends AppCompatActivity {
 
         //view Model sec
         mSurveyPojoViewModel = new ViewModelProvider(this).get(SurveyPojoViewModel.class);
-        mSurveyPojoViewModel.getAllSurveys().observe(this, new Observer<List<SurveyPojo>>() {
+        mSurveyPojoViewModel.getAllSurveys().observe(this, new Observer<List<SurveyTobeSaved>>() {
             @Override
-            public void onChanged(@Nullable final List<SurveyPojo> surveyPojoList) {
+            public void onChanged(@Nullable final List<SurveyTobeSaved> surveyList) {
                 // Update the cached copy of the words in the adapter.
-                Log.e("surveyListSize",surveyPojoList.size()+"");
+                Log.e("surveyListSize",surveyList.size()+"");
             }
         });
 
@@ -159,11 +160,19 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
-    public void event_survey_completed(AnswersReference instance) {
+    public void event_survey_completed(SessionReference instance) {
+
+        Log.d("****", "****************** WE HAVE ANSWERS ******************");
+        Log.v("ANSWERS JSON", new Gson().toJson(instance.mSurveyTobeSaved));
+        Log.d("****", "*****************************************************");
+
+
+        mSurveyPojoViewModel.insert(instance.mSurveyTobeSaved);
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("answers", instance.get_json_object());
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
+
+
     }
 
 

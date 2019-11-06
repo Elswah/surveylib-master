@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.androidadvance.androidsurvey.AnswersReference;
+import com.androidadvance.androidsurvey.SessionReference;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
@@ -44,7 +44,7 @@ public class FragmentEnd extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ((SurveyActivity) mContext).event_survey_completed(AnswersReference.getInstance());
+                ((SurveyActivity) mContext).event_survey_completed(SessionReference.getInstance());
 
             }
         });
