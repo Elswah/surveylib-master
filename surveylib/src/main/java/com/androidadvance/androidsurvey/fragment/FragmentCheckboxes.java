@@ -18,6 +18,7 @@ import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
+import com.androidadvance.androidsurvey.utilities.Fonts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +40,9 @@ public class FragmentCheckboxes extends Fragment {
                 R.layout.fragment_checkboxes, container, false);
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
+        Fonts.set(button_continue, getContext());
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
+        Fonts.set(textview_q_title, getContext());
         linearLayout_checkboxes = (LinearLayout) rootView.findViewById(R.id.linearLayout_checkboxes);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override

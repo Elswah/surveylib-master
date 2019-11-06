@@ -19,6 +19,7 @@ import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
+import com.androidadvance.androidsurvey.utilities.Fonts;
 
 public class FragmentMultiline extends Fragment {
 
@@ -36,6 +37,11 @@ public class FragmentMultiline extends Fragment {
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         editText_answer = (EditText) rootView.findViewById(R.id.editText_answer);
+
+        Fonts.set(button_continue, getContext());
+        Fonts.set(textview_q_title, getContext());
+        Fonts.set(editText_answer, getContext());
+
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                  Answers.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());

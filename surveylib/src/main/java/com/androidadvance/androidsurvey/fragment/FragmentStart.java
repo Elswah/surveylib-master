@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
+import com.androidadvance.androidsurvey.utilities.Fonts;
 
 
 public class FragmentStart extends Fragment {
@@ -27,7 +28,9 @@ public class FragmentStart extends Fragment {
                 R.layout.fragment_start, container, false);
 
         textView_start = (TextView) rootView.findViewById(R.id.textView_start);
+        Fonts.set(textView_start, getContext());
         Button button_continue = (Button) rootView.findViewById(R.id.button_continue);
+        Fonts.set(button_continue, getContext());
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

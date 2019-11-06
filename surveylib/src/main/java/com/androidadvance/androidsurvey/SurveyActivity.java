@@ -28,11 +28,11 @@ public class SurveyActivity extends AppCompatActivity {
     private ViewPager mPager;
     private String style_string = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_survey);
-
 
 
         if (getIntent().getExtras() != null) {

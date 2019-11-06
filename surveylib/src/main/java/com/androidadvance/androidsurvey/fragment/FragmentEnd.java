@@ -14,6 +14,7 @@ import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.SurveyProperties;
+import com.androidadvance.androidsurvey.utilities.Fonts;
 
 public class FragmentEnd extends Fragment {
 
@@ -29,6 +30,8 @@ public class FragmentEnd extends Fragment {
 
         Button button_finish = (Button) rootView.findViewById(R.id.button_finish);
         textView_end = (TextView) rootView.findViewById(R.id.textView_end);
+        Fonts.set(button_finish, getContext());
+        Fonts.set(textView_end, getContext());
 
 
         button_finish.setOnClickListener(new View.OnClickListener() {

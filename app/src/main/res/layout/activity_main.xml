@@ -20,19 +20,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Example #1"
+            android:text="@string/personal_question"
             android:id="@+id/button_survey_example_1"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Example #2"
+            android:text="@string/information_question"
             android:id="@+id/button_survey_example_2" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Example #3"
+            android:text="@string/your_survay"
             android:id="@+id/button_survey_example_3" />
     </LinearLayout>
 </RelativeLayout>

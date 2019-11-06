@@ -1,12 +1,15 @@
 package androidadvance.com.androidsurveyexample;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import com.androidadvance.androidsurvey.SurveyActivity;
+import com.androidadvance.androidsurvey.utilities.Fonts;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Button button_survey_example_1 = (Button) findViewById(R.id.button_survey_example_1);
         Button button_survey_example_2 = (Button) findViewById(R.id.button_survey_example_2);
         Button button_survey_example_3 = (Button) findViewById(R.id.button_survey_example_3);
+        Fonts.set(button_survey_example_1, this);
+        Fonts.set(button_survey_example_2, this);
+        Fonts.set(button_survey_example_3, this);
 
         button_survey_example_1.setOnClickListener(new View.OnClickListener() {
             @Override

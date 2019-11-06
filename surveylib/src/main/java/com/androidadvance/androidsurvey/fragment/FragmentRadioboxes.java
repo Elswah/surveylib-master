@@ -19,6 +19,7 @@ import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
+import com.androidadvance.androidsurvey.utilities.Fonts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +44,10 @@ public class FragmentRadioboxes extends Fragment {
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
+
+        Fonts.set(button_continue, getContext());
+        Fonts.set(textview_q_title, getContext());
+
         radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -20,6 +20,7 @@ import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.androidadvance.androidsurvey.models.Question;
+import com.androidadvance.androidsurvey.utilities.Fonts;
 
 public class FragmentNumber extends Fragment {
 
@@ -37,6 +38,11 @@ public class FragmentNumber extends Fragment {
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         editText_answer = (EditText) rootView.findViewById(R.id.editText_answer);
+
+        Fonts.set(button_continue, getContext());
+        Fonts.set(textview_q_title, getContext());
+        Fonts.set(editText_answer, getContext());
+
         editText_answer.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
